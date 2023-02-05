@@ -10,7 +10,7 @@ int main()
     double num1;
     double num2;
     double result;
-    bool repeat=true;
+  
 
         std::cout << "$$$Calculator$$$" << std::endl;
         std::cout << "Choose an operand + - * / or press q to quit" << std::endl;
