@@ -14,7 +14,7 @@ do
 
     srand(time(NULL));
 
-    int num = rand() % 11; //has to be+1 to be 0-10 if u want to start from 1 do +1
+    int num = rand() % 11; //has to be+1 to be 0-10 if you want to start from 1 do +1
 
     std::cout << "Your random number is: " << num << std::endl;
 } while (start!='q');
