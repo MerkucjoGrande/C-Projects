@@ -1,28 +1,60 @@
 #include <iostream>
-#include <string>
+#include <cmath>
 
 int main()
 {
-    std::string start;
 
-    std::cout << "Random number generator 0-10" << std::endl;
+    char op;
+    double num1;
+    double num2;
+    double result;
+
+    std::cout << "$$$Calculator$$$" << std::endl;
     do
     {
+    std::cout << "Choose an operand + - * / or press q to quit" << std::endl;
+    std::cin >> op;
 
-        std::cout << "Press to any key to generate press q to exit" << std::endl;
-        std::getline(std::cin, start);
-        if (std::cin.fail())
-        {
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            continue;
-        }
-        srand(time(NULL));
+    std::cout << "Choose number 1" << std::endl;
+    std::cin >> num1;
+    if (std::cin.fail())
+    {
+        std::cout << "Invalid input, try again!" << std::endl;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+    std::cout << "Chose number 2" << std::endl;
+    std::cin >> num2;
+    if (std::cin.fail())
+    {
+        std::cout << "Invalid input, try again!" << std::endl;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
 
-        int num = rand() % 11; // has to be+1 to be 0-10 if you want to start from 1 do +1
+    switch (op)
+    {
+    case '+':
+        std::cout << "You chose addition" << std::endl;
+        std::cout << "The result of addition is: " << num1 + num2 << std::endl;
+        break;
+    case '-':
+        std::cout << "You chose subtraction" << std::endl;
+        std::cout << "The result of subtraction is: " << num1 - num2 << std::endl;
+        break;
+    case '*':
+        std::cout << "You chose multiplication" << std::endl;
+        std::cout << "The result of multiplication is: " << num1 * num2 << std::endl;
+        break;
+    case '/':
+        std::cout << "You chose division" << std::endl;
 
-        std::cout << "Your random number is: " << num << std::endl;
-    } while (start != "q");
-
+        std::cout << "The result of division is: " << num1 / num2 << std::endl;
+        break;
+    default:
+        std::cout << "Wrong input!" << std::endl;
+        break;
+    }
+    } while (op != 'q');
     return 0;
 }
