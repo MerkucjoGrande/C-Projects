@@ -1,31 +1,75 @@
 #include <iostream>
 #include <string>
 
-
-/*Luhn algorithm
-1. Double every second digit from right to left If doubled number is 2 digits, split them
-2. Add all single digits from step 1
-3. Add all odd numbered digits from right to left
-4. summ results from steps 2 & 3
-5. If step 4 is divisible by 10, # is valid
-Work in Progres*/
+int getDigit(const int lastnums);
+int sumOddDigits(const std::string cardNumber);
+int sumEvenDigits(const std::string cardNumber);
 
 int main()
 {
-    std::string cardnum;
-    std::cout << "Credit-card-validator-program" << std::endl;
     while (true)
     {
         std::cout << "Enter your card number to check validity" << std::endl;
+        int result = 0;
+        std::string cardnum;
         std::cin >> cardnum;
-        if (cardnum.length() != 16)
+
+        bool isNum = true;
+        for (char c : cardnum)
         {
-            std::cout << "Invalid input: length must be 16" << std::endl;
+            if (!isdigit(c))
+            {
+                isNum = false;
+                break;
+            }
+        }
+        if (cardnum.length() != 16 || !isNum)
+        {
+            std::cout << "Invalid input: please enter 16 digits only" << std::endl;
         }
         else
         {
+            result = sumEvenDigits(cardnum) + sumOddDigits(cardnum);
+
+            if (result % 10 == 0)
+            {
+                std::cout << cardnum << " is valid";
+            }
+            else
+            {
+                std::cout << cardnum << " is not valid";
+            }
             break;
         }
     }
     return 0;
+}
+
+int getDigit(const int lastnums)
+{
+    return lastnums % 10 + (lastnums / 10 % 10);
+}
+
+int sumOddDigits(const std::string cardNumber)
+{
+    int sum = 0;
+
+    for (int i = cardNumber.size() - 1; i >= 0; i -= 2)
+    {
+        sum += cardNumber[i] - '0';
+    }
+
+    return sum;
+}
+
+int sumEvenDigits(const std::string cardNumber)
+{
+    int sum = 0;
+
+    for (int i = cardNumber.size() - 2; i >= 0; i -= 2)
+    {
+        sum += getDigit((cardNumber[i] - '0') * 2);
+    }
+
+    return sum;
 }
